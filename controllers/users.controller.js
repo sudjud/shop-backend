@@ -31,5 +31,67 @@ module.exports.userController = {
     } catch (e) {
       res.json(e);
     }
+  },
+  postReview: async (req, res) => {
+    try {
+      await User.findByIdAndUpdate(req.params.id, {
+        $push: {
+          reviews: {
+            text: req.body.text,
+            product: req.params.productId
+          }
+        }
+      })
+      res.json('Отзыв добавлен')
+    } catch (e) {
+      res.json(e);
+    }
+  },
+  getReviews: async (req, res) => {
+    try {
+      res.json(await User.find({
+        'reviews.product': req.params.productId
+      }).select('name reviews.text -_id'));
+    } catch (e) {
+      res.json(e);
+    }
+  },
+  deleteReview: async (req, res) => {
+    try {
+      await User.findByIdAndUpdate(req.params.id, {
+        $pull: {
+          reviews: {
+            _id: req.params.reviewId
+          }
+        }
+      })
+      res.json('Отзыв удален')
+    } catch (e) {
+      res.json(e);
+    }
+  },
+  addProdToCart: async (req, res) => {
+    try {
+      await User.findByIdAndUpdate(req.params.id, {
+        $push: {
+          'cart.products': req.params.productId
+        }
+      })
+      res.json('Товар добавлен в корзину')
+    } catch (e) {
+      
+    }
+  },
+  removeProdFromCart: async (req, res) => {
+    try {
+      await User.findByIdAndUpdate(req.params.id, {
+        $pull: {
+          'cart.products': req.params.productId
+        }
+      })
+      res.json('Товар удален из корзины')
+    } catch (e) {
+      res.json(e);
+    }
   }
 }

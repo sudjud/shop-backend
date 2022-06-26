@@ -5,6 +5,9 @@ const userSchema = Schema({
   name: String,
   reviews: [{
     text: String,
+    id: {
+      type: Schema.Types.ObjectId
+    },
     product: {
       type: Schema.Types.ObjectId,
       ref: 'Product'
@@ -20,7 +23,6 @@ const userSchema = Schema({
       ref: 'Product'
     }]
   },
-
 })
 
 const User = mongoose.model('User', userSchema)

@@ -10,7 +10,7 @@ router.patch("/admin/brand/:id", brandsController.patchBrand);
 
 router.delete("/admin/brand/:id", brandsController.deleteBrand);
 
-router.get("user/brand/:id", brandsController.getBrandById);
+router.get("/user/brand/:id", brandsController.getBrandById);
 
 
 module.exports = router;
