@@ -14,4 +14,5 @@ mongoose.connect("mongodb+srv://khalid:1234@cluster0.qcris2c.mongodb.net/shop-ba
 })
   .catch(() => console.log('Ошибка при соединении с сервером'));
 
+  
 app.use(require('./routes/index'))
