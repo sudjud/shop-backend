@@ -19,7 +19,7 @@ module.exports.categoryController = {
       const data = await Category.create({
         nameCategory: req.body.nameCategory,
       });
-      res.json(`Категория ${data} добавлена!`);
+      res.json(`Категория ${req.body.nameCategory} добавлена!`);
     } catch (error) {
       res.json(error.toString());
     }
@@ -29,7 +29,7 @@ module.exports.categoryController = {
       const data = await Category.findByIdAndUpdate(req.params.id, {
         nameCategory: req.body.nameCategory,
       });
-      res.json(`Категория ${data} изменена!`);
+      res.json(`Категория ${req.body.nameCategory} изменена!`);
     } catch (error) {
       res.json(error.toString());
     }
